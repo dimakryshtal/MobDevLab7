@@ -156,11 +156,12 @@ extension ListViewController: UISearchBarDelegate {
                     }
                     
                 }
-                Manager.shared.fetchData(with: "MoviesCore", searchStr: searchText,attribute: "title", ofType: MoviesCore.self) {[weak self] (ans, err) in
-                    self?.searchArr = ans
-                    
-                }
+                
                 DispatchQueue.main.async {
+                    Manager.shared.fetchData(with: "MoviesCore", searchStr: searchText,attribute: "title", ofType: MoviesCore.self) {[weak self] (ans, err) in
+                        self?.searchArr = ans
+                    }
+
                     self?.tableView.reloadData()
                 }
             }

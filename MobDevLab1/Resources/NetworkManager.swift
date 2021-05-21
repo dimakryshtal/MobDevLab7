@@ -23,7 +23,7 @@ final class NetworkManager:NSObject, NetworkManagerDelegate, URLSessionDelegate 
     
     lazy var urlsession: URLSession = {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForResource = 1
+        config.timeoutIntervalForResource = 30
         return URLSession(configuration: config)
     }()
     
@@ -42,8 +42,6 @@ extension NetworkManager {
                     completion(nil, error)
                     return
                 }
-                print(httpresponse)
-                print(error)
                 DispatchQueue.main.async {
                     completion(data, nil)
                 }
