@@ -21,14 +21,18 @@ class CustomTableViewCell: UITableViewCell {
         myContentView.bottomAnchor.constraint(greaterThanOrEqualTo: myStackView.bottomAnchor, constant: 10)
     ]
     
-    func setImageAndLabel(movie: Movie) {
+    func setImageAndLabel(movie: MoviesCore) {
         myImageView.image = nil
         if(movie.poster == "" || movie.poster == "N/A") {
             myImageView.image = nil
         } else {
-            NetworkManager.sharad.getImage(with: movie.poster) {[weak self] (cover, error) in
-                if let cover = cover {
-                    self?.myImageView.image = cover
+            Manager.shared.fetchData(with: "Pictures", searchStr: movie.poster!, attribute: "title", ofType: Pictures.self) {[weak self] (pict, error) in
+                if(pict.count > 0) {
+                    self?.myImageView.image = UIImage(data: pict[0].cover!)
+                } else {
+                    NetworkManager.sharad.getImage(with: movie.poster!) {[weak self] (cover, error) in
+                        self?.myImageView.image = cover
+                    }
                 }
             }
         }

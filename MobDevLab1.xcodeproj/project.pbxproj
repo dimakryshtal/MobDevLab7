@@ -15,6 +15,8 @@
 		32001CAC25FE525B00AD1DE4 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32001CAA25FE525B00AD1DE4 /* MyCollectionViewCell.xib */; };
 		3209CC6F25FFDCD9008D78B3 /* MyCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209CC6E25FFDCD9008D78B3 /* MyCollectionViewLayout.swift */; };
 		321AEA9025E00E8A000C123E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321AEA8F25E00E8A000C123E /* ListViewController.swift */; };
+		321DC3F82656D87000C1F936 /* Pictures+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3F62656D87000C1F936 /* Pictures+CoreDataClass.swift */; };
+		321DC3F92656D87000C1F936 /* Pictures+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321DC3F72656D87000C1F936 /* Pictures+CoreDataProperties.swift */; };
 		329A027425DAB177001380B8 /* DiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329A027325DAB177001380B8 /* DiagramView.swift */; };
 		32BC841E25CED9FF00DB61EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BC841D25CED9FF00DB61EA /* AppDelegate.swift */; };
 		32BC842025CED9FF00DB61EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BC841F25CED9FF00DB61EA /* SceneDelegate.swift */; };
@@ -22,7 +24,12 @@
 		32BC842725CEDA0600DB61EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32BC842625CEDA0600DB61EA /* Assets.xcassets */; };
 		32BC842A25CEDA0600DB61EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32BC842825CEDA0600DB61EA /* LaunchScreen.storyboard */; };
 		32C6067025E7A5BD00230A2A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C6066F25E7A5BD00230A2A /* MovieDetailsViewController.swift */; };
+		32D695A42653ED720061799F /* MobDevLab1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32D695A22653ED720061799F /* MobDevLab1.xcdatamodeld */; };
 		32DC4E4625ED2D7700A2234B /* AddMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DC4E4525ED2D7700A2234B /* AddMovieViewController.swift */; };
+		32DD9DEA26566E0700CB063E /* Details+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD9DE626566E0700CB063E /* Details+CoreDataClass.swift */; };
+		32DD9DEB26566E0700CB063E /* Details+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD9DE726566E0700CB063E /* Details+CoreDataProperties.swift */; };
+		32DD9DF326566E9200CB063E /* MoviesCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD9DF126566E9200CB063E /* MoviesCore+CoreDataClass.swift */; };
+		32DD9DF426566E9200CB063E /* MoviesCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD9DF226566E9200CB063E /* MoviesCore+CoreDataProperties.swift */; };
 		32EBF23D25E9779A00C26A33 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EBF23C25E9779A00C26A33 /* Manager.swift */; };
 		32ECE1A025E1299B00F1D58C /* CodableMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ECE19F25E1299B00F1D58C /* CodableMovies.swift */; };
 		32F055D825D580DB00ADCC38 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F055D725D580DB00ADCC38 /* DrawingViewController.swift */; };
@@ -40,6 +47,8 @@
 		32001CAA25FE525B00AD1DE4 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		3209CC6E25FFDCD9008D78B3 /* MyCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewLayout.swift; sourceTree = "<group>"; };
 		321AEA8F25E00E8A000C123E /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		321DC3F62656D87000C1F936 /* Pictures+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pictures+CoreDataClass.swift"; sourceTree = "<group>"; };
+		321DC3F72656D87000C1F936 /* Pictures+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pictures+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		329A027325DAB177001380B8 /* DiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramView.swift; sourceTree = "<group>"; };
 		32BC841A25CED9FF00DB61EA /* MobDevLab1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobDevLab1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32BC841D25CED9FF00DB61EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,7 +58,12 @@
 		32BC842925CEDA0600DB61EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32BC842B25CEDA0600DB61EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32C6066F25E7A5BD00230A2A /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		32D695A32653ED720061799F /* MobDevLab1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MobDevLab1.xcdatamodel; sourceTree = "<group>"; };
 		32DC4E4525ED2D7700A2234B /* AddMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewController.swift; sourceTree = "<group>"; };
+		32DD9DE626566E0700CB063E /* Details+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Details+CoreDataClass.swift"; sourceTree = "<group>"; };
+		32DD9DE726566E0700CB063E /* Details+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Details+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		32DD9DF126566E9200CB063E /* MoviesCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesCore+CoreDataClass.swift"; sourceTree = "<group>"; };
+		32DD9DF226566E9200CB063E /* MoviesCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32EBF23C25E9779A00C26A33 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		32ECE19F25E1299B00F1D58C /* CodableMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMovies.swift; sourceTree = "<group>"; };
 		32F055D725D580DB00ADCC38 /* DrawingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
@@ -121,12 +135,27 @@
 		32BC841C25CED9FF00DB61EA /* MobDevLab1 */ = {
 			isa = PBXGroup;
 			children = (
+				32D695AF265406E50061799F /* CoreData */,
 				32FE2F0925E6A1B600EF4452 /* Resources */,
 				321AEA8D25E0035A000C123E /* Views */,
 				32F055D625D580C000ADCC38 /* Controllers */,
 				32BC842B25CEDA0600DB61EA /* Info.plist */,
+				32D695A22653ED720061799F /* MobDevLab1.xcdatamodeld */,
 			);
 			path = MobDevLab1;
+			sourceTree = "<group>";
+		};
+		32D695AF265406E50061799F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				321DC3F62656D87000C1F936 /* Pictures+CoreDataClass.swift */,
+				321DC3F72656D87000C1F936 /* Pictures+CoreDataProperties.swift */,
+				32DD9DF126566E9200CB063E /* MoviesCore+CoreDataClass.swift */,
+				32DD9DF226566E9200CB063E /* MoviesCore+CoreDataProperties.swift */,
+				32DD9DE626566E0700CB063E /* Details+CoreDataClass.swift */,
+				32DD9DE726566E0700CB063E /* Details+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		32F055D625D580C000ADCC38 /* Controllers */ = {
@@ -235,12 +264,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				32C6067025E7A5BD00230A2A /* MovieDetailsViewController.swift in Sources */,
+				32DD9DEB26566E0700CB063E /* Details+CoreDataProperties.swift in Sources */,
+				321DC3F92656D87000C1F936 /* Pictures+CoreDataProperties.swift in Sources */,
+				32D695A42653ED720061799F /* MobDevLab1.xcdatamodeld in Sources */,
 				32001CA625FE41E400AD1DE4 /* PhotosViewController.swift in Sources */,
 				32FC8D4E25E1639C00377BE2 /* CustomTableViewCell.swift in Sources */,
+				32DD9DF326566E9200CB063E /* MoviesCore+CoreDataClass.swift in Sources */,
 				11CF37E1260D12490078C325 /* CodablePhotos.swift in Sources */,
 				329A027425DAB177001380B8 /* DiagramView.swift in Sources */,
 				11FE8CAB260A164600A1FBBF /* NetworkManager.swift in Sources */,
 				32F055D825D580DB00ADCC38 /* DrawingViewController.swift in Sources */,
+				32DD9DEA26566E0700CB063E /* Details+CoreDataClass.swift in Sources */,
 				32FE2F0C25E6A36000EF4452 /* ViewController.swift in Sources */,
 				32ECE1A025E1299B00F1D58C /* CodableMovies.swift in Sources */,
 				32BC841E25CED9FF00DB61EA /* AppDelegate.swift in Sources */,
@@ -248,8 +282,10 @@
 				32F055DC25D59BCD00ADCC38 /* GraphView.swift in Sources */,
 				3209CC6F25FFDCD9008D78B3 /* MyCollectionViewLayout.swift in Sources */,
 				32EBF23D25E9779A00C26A33 /* Manager.swift in Sources */,
+				321DC3F82656D87000C1F936 /* Pictures+CoreDataClass.swift in Sources */,
 				32BC842025CED9FF00DB61EA /* SceneDelegate.swift in Sources */,
 				321AEA9025E00E8A000C123E /* ListViewController.swift in Sources */,
+				32DD9DF426566E9200CB063E /* MoviesCore+CoreDataProperties.swift in Sources */,
 				11D083CE2610A44400C0273E /* SpinnerViewController.swift in Sources */,
 				32DC4E4625ED2D7700A2234B /* AddMovieViewController.swift in Sources */,
 			);
@@ -451,6 +487,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		32D695A22653ED720061799F /* MobDevLab1.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				32D695A32653ED720061799F /* MobDevLab1.xcdatamodel */,
+			);
+			currentVersion = 32D695A32653ED720061799F /* MobDevLab1.xcdatamodel */;
+			path = MobDevLab1.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 32BC841225CED9FF00DB61EA /* Project object */;
 }

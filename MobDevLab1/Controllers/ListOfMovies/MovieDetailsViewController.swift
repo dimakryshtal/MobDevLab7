@@ -9,7 +9,7 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
     
-    var details: Movie?
+    var details: Details?
 
     @IBOutlet var poster: UIImageView!
     @IBOutlet var movieTitle: UILabel!
@@ -30,6 +30,7 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         setImageAndLabels()
     }
     
@@ -38,16 +39,22 @@ class MovieDetailsViewController: UIViewController {
         child.view.frame = view.frame
         view.addSubview(child.view)
         child.didMove(toParent: self)
-        NetworkManager.sharad.getImage(with: details!.poster) {[weak self] (image, err) in
+       
+        Manager.shared.fetchData(with: "Pictures", searchStr: details!.poster!, attribute: "title", ofType: Pictures.self) {[weak self] (pict, error) in
             child.willMove(toParent: nil)
             child.view.removeFromSuperview()
             child.removeFromParent()
-            if let image = image {
-                self?.poster.image = image
+            if(pict.count > 0) {
+                self?.poster.image = UIImage(data: pict[0].cover!)
+            } else {
+                NetworkManager.sharad.getImage(with: self!.details!.poster!) {[weak self] (cover, error) in
+                    self?.poster.image = cover
+                }
             }
         }
-        movieTitle.text = "Title: " + details!.title
-        year.text = "Year: " + details!.year
+        
+        movieTitle.text = "Title: " + details!.title!
+        year.text = "Year: " + details!.year!
         genre.text = "Genre: " + details!.genre!
         director.text = "Director: " + details!.director!
         actors.text = "Actors: " + details!.actors!

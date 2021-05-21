@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 protocol NetworkManagerDelegate {
     func getMovies(with name: String, completion: @escaping (Data?, Error?) -> Void)
     func getMovieDetails(with identifier: String, completion: @escaping (Data?, Error?) -> Void)
@@ -22,6 +23,7 @@ final class NetworkManager:NSObject, NetworkManagerDelegate, URLSessionDelegate 
     
     lazy var urlsession: URLSession = {
         let config = URLSessionConfiguration.default
+        config.timeoutIntervalForResource = 1
         return URLSession(configuration: config)
     }()
     
@@ -35,9 +37,13 @@ extension NetworkManager {
         guard let components = URLComponents(string: urlString), let url = components.url else {return}
         DispatchQueue.global(qos: .background).async {[weak self] in
             self?.datatask = self?.urlsession.dataTask(with: URLRequest(url: url)) { (data, response, error) in
-                guard let httpresponse = response as? HTTPURLResponse,
-                    let data = data,
-                    httpresponse.statusCode == 200 else {return}
+                
+                guard let httpresponse = response as? HTTPURLResponse, let data = data, httpresponse.statusCode == 200 else {
+                    completion(nil, error)
+                    return
+                }
+                print(httpresponse)
+                print(error)
                 DispatchQueue.main.async {
                     completion(data, nil)
                 }
@@ -89,8 +95,14 @@ extension NetworkManager {
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.datatask = self?.urlsession.downloadTask(with: url) { (tempURL, response, error) in
                 if let tempURL = tempURL,
+                   let httpresponse = response as? HTTPURLResponse,
                    let data = try? Data(contentsOf: tempURL),
-                   let image = UIImage(data: data) {
+                   httpresponse.statusCode == 200 {
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        Manager.shared.addPicture(data: data, link: imageURL)
+
+                    }
                     DispatchQueue.main.async {
                         completion(image, nil)
                     }

@@ -27,11 +27,19 @@ class MyCollectionViewCell: UICollectionViewCell {
         
         
         myImageView.backgroundColor = .gray
-        NetworkManager.sharad.getImage(with: url) { [weak self](image, error) in
-            child.view.removeFromSuperview()
-            child.removeFromParent()
-            if let img = image {
-                self?.myImageView.image = img
+      
+        Manager.shared.fetchData(with: "Pictures", searchStr: url, attribute: "title", ofType: Pictures.self) {[weak self] (pict, error) in
+
+            if(pict.count > 0) {
+                child.view.removeFromSuperview()
+                child.removeFromParent()
+                self?.myImageView.image = UIImage(data: pict[0].cover!)
+            } else {
+                NetworkManager.sharad.getImage(with: url) {[weak self] (cover, error) in
+                    child.view.removeFromSuperview()
+                    child.removeFromParent()
+                    self?.myImageView.image = cover
+                }
             }
         }
     }

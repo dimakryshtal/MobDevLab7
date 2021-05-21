@@ -12,9 +12,10 @@ class ListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     
-    var currMovie: Movie?
-
-    var searchArr = [Movie]()
+    var currMovie: Details?
+    var globalSearchText = ""
+    
+    var searchArr = [MoviesCore]()
     var searching = false
     
     override func viewDidLoad() {
@@ -37,17 +38,23 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(searchArr.count == 0) {
-            tableView.setEmptyView()
+        if(searchArr.count == 0 && globalSearchText.count < 3) {
+            tableView.setEmptyView(text: "No items found")
+        } else if (searchArr.count == 0 && globalSearchText.count >= 3){
+            tableView.setEmptyView(text: "No items found. \n Check your internet connection.")
         } else {
-            tableView.restore()
+            DispatchQueue.main.async {
+
+                tableView.restore()
+        
+            }
         }
         
         return searchArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var movie: Movie?
+        var movie: MoviesCore?
         if searching {
             movie = searchArr[indexPath.row]
         }
@@ -59,13 +66,20 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (searching && searchArr[indexPath.row].imdbID.prefix(2) == "tt") {
-            NetworkManager.sharad.getMovieDetails(with: searchArr[indexPath.row].imdbID) { (data, error) in
-                if let data = data {
-                    self.currMovie = Manager.shared.parseJSON(data: data, type: Movie.self)
+        if (searching && searchArr[indexPath.row].imdbID!.prefix(2) == "tt") {
+            NetworkManager.sharad.getMovieDetails(with: self.searchArr[indexPath.row].imdbID!) { (data, error) in
+                if let data = data, error == nil {
+                    let parsedMovie = Manager.shared.parseJSON(data: data, type: Movie.self)
+                    Manager.shared.addDetails(parsedMovie!)
+                }
+                Manager.shared.fetchData(with: "Details", searchStr: self.searchArr[indexPath.row].imdbID!, attribute: "imdbID", ofType: Details.self) {[weak self] (data, error) in
+                    if(data.count == 1) {
+                        self?.currMovie = data[0]
+                    }
                 }
                 self.performSegue(withIdentifier: "showdetail", sender: self)
             }
+            
         } else {
             self.tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -86,7 +100,7 @@ extension ListViewController {
     @IBAction func unwindToVC(segue: UIStoryboardSegue) {
         if let sourceVC = segue.source as? AddMovieViewController {
             if (sourceVC.movie!.title != "") {
-                searchArr.append(sourceVC.movie!)
+                //searchArr.append(sourceVC.movie!)
                 tableView.reloadData()
             }
         }
@@ -110,11 +124,12 @@ extension ListViewController {
 
 extension ListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        globalSearchText = searchText
         let child = SpinnerViewController()
         child.view.frame = tableView.frame
         if (searchText.count < 3) {
             searching = false
-            searchArr = [Movie]()
+            searchArr = [MoviesCore]()
             child.removeFromParent()
             self.tableView.reloadData()
         } else if(searchText.count >= 3){
@@ -123,15 +138,29 @@ extension ListViewController: UISearchBarDelegate {
             child.didMove(toParent: self)
             
             NetworkManager.sharad.getMovies(with: searchText) {[weak self] (data, err) in
-                child.willMove(toParent: nil)
-                child.view.removeFromSuperview()
-                child.removeFromParent()
-                if let data = data{
+                DispatchQueue.main.async {
+                    child.willMove(toParent: nil)
+                    child.view.removeFromSuperview()
+                    child.removeFromParent()
+                }
+                if let data = data, err == nil{
                     if let movies = Manager.shared.parseJSON(data: data, type: Movies.self) {
-                        self?.searchArr = movies.Search
+                        Manager.shared.addItems(movies.Search)
                     } else {
                         self?.searchArr = []
                     }
+                } else {
+                    DispatchQueue.main.async {
+                         
+                        self?.showAlert(message: "No Internet Connection", title: "Error")
+                    }
+                    
+                }
+                Manager.shared.fetchData(with: "MoviesCore", searchStr: searchText,attribute: "title", ofType: MoviesCore.self) {[weak self] (ans, err) in
+                    self?.searchArr = ans
+                    
+                }
+                DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             }
@@ -182,7 +211,7 @@ extension ListViewController {
 }
 
 extension UITableView {
-    func setEmptyView () {
+    func setEmptyView (text: String) {
         let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
         let label = UILabel()
         emptyView.addSubview(label)
@@ -191,7 +220,7 @@ extension UITableView {
         label.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
         label.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
         
-        label.text = "No items found"
+        label.text = text
         label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .center
